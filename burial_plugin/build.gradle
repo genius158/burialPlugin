@@ -43,10 +43,10 @@ uploadArchives {
 //
 //  libraryDescription = 'burial'
 //
-//  siteUrl = 'https://github.com/genius158'
-//  gitUrl = 'https://github.com/genius158'
+//  siteUrl = 'https://github.com/genius158/burialPlugin'
+//  gitUrl = 'https://github.com/genius158/burialPlugin.git'
 //
-//  libraryVersion = "0.0.6"
+//  libraryVersion = "0.0.7"
 //
 //  developerId = 'yan158'
 //  developerName = 'genius158'

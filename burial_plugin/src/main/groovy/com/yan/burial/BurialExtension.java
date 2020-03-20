@@ -7,10 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by quinn on 27/06/2017.
- * whitelist is prior to to blacklist
- */
 public class BurialExtension {
 
   public RunVariant runVariant = RunVariant.ALWAYS;

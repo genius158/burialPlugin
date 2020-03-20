@@ -30,7 +30,6 @@ android {
 dependencies {
   implementation fileTree(include: ['*.jar'], dir: 'libs')
   implementation 'com.android.support:appcompat-v7:27.1.1'
-  implementation 'com.quinn.hunter:hunter-debug-library:0.9.4'
   implementation 'org.apache.commons:commons-lang3:3.7'
   implementation project(':burialTimer')
 

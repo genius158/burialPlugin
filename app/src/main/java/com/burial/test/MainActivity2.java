@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import com.yan.burial.method.timer.BurialTimer;
 
 public class MainActivity2 extends Activity {
@@ -12,9 +13,9 @@ public class MainActivity2 extends Activity {
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    BurialTimer.getTimer().setListener((className, methodName, des, cost) -> {
-
-    });
+    BurialTimer.getTimer().setListener(
+        (ignore, className, methodName, des, cost) -> Log.e("BurialTimer",
+            className + "  " + methodName + "  " + des + "  " + des));
   }
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState,

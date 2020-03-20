@@ -21,7 +21,7 @@ public class BurialTimer {
     long cost = System.currentTimeMillis() - startTime;
     Listener listener = getTimer().listener;
     if (listener != null) {
-      listener.timer(className, methodName, des, cost);
+      listener.timer(null, className, methodName, des, cost);
     }
   }
 }

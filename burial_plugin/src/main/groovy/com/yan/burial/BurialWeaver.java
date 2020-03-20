@@ -4,9 +4,6 @@ import com.quinn.hunter.transform.asm.BaseWeaver;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
 
-/**
- * Created by Quinn on 09/07/2017.
- */
 public final class BurialWeaver extends BaseWeaver {
   static final String PLUGIN_LIBRARY = "com.yan.burial.method.timer";
 

@@ -6,9 +6,9 @@ publish {
   userOrg = 'yan157'
   groupId = 'com.yan.burial.method.timer'
   artifactId = 'burialtimer'
-  publishVersion = '0.0.5'
+  publishVersion = '0.0.6'
   desc = ""
-  website = 'https://github.com/genius158'
+  website = 'https://github.com/genius158/burialPlugin'
 }
 
 android {

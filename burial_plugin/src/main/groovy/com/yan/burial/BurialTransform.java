@@ -12,9 +12,6 @@ import java.util.Collection;
 import java.util.Set;
 import org.gradle.api.Project;
 
-/**
- * Created by quinn on 07/09/2018
- */
 public final class BurialTransform extends HunterTransform {
   private BurialExtension burialExtension;
   private Project project;
@@ -42,7 +39,7 @@ public final class BurialTransform extends HunterTransform {
   }
 
   @Override public Set<QualifiedContent.Scope> getScopes() {
-    if (burialExtension==null)return super.getScopes();
+    if (burialExtension == null) return super.getScopes();
     Set<QualifiedContent.Scope> extScopes = burialExtension.getScopes();
     if (extScopes != null) {
       return extScopes;

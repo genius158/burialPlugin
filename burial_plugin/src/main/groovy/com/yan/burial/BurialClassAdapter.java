@@ -37,7 +37,8 @@ public final class BurialClassAdapter extends ClassVisitor {
   public MethodVisitor visitMethod(final int access, final String name,
       final String desc, final String signature, final String[] exceptions) {
     MethodVisitor mv = cv.visitMethod(access, name, desc, signature, exceptions);
-    if (isPluginInterface) {
+    boolean isPluginListenMethod = desc.contains(pluginPatch);
+    if (isPluginInterface || isPluginListenMethod) {
       return mv;
     }
     BurialLog.info(

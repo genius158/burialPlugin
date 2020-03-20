@@ -1,0 +1,36 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        google()
+        mavenLocal()
+        jcenter()
+        maven {
+            url uri('burial_plugin/plugins')
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.1'
+        classpath 'com.yan.burial:burial_plugin:0.0.1'
+
+        classpath 'com.novoda:bintray-release:0.8.1'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenLocal()
+        jcenter()
+
+        maven {
+            url uri('burial_plugin/plugins')
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

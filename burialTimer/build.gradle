@@ -6,7 +6,7 @@ publish {
   userOrg = 'yan157'
   groupId = 'com.yan.burial.method.timer'
   artifactId = 'burialtimer'
-  publishVersion = '0.0.6'
+  publishVersion = '0.0.7'
   desc = ""
   website = 'https://github.com/genius158/burialPlugin'
 }

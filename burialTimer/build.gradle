@@ -1,15 +1,36 @@
 apply plugin: 'com.android.library'
 
-//apply plugin: 'com.novoda.bintray-release'
-//
-//publish {
-//  userOrg = 'yan157'
-//  groupId = 'com.yan.burial.method.timer'
-//  artifactId = 'burialtimer'
-//  publishVersion = '0.0.8'
-//  desc = ""
-//  website = 'https://github.com/genius158/burialPlugin'
-//}
+apply plugin: 'com.novoda.bintray-release'
+
+def userName
+def userKey
+File file = rootProject.file('local.properties')
+if (file.exists()) {
+  //加载资源
+  InputStream inputStream = rootProject.file('local.properties').newDataInputStream();
+  Properties properties = new Properties()
+  properties.load(inputStream)
+
+  if (properties.containsKey("bintray.user")) {
+    userName = properties.getProperty("bintray.user")
+  }
+  if (properties.containsKey("bintray.apikey")) {
+    userKey = properties.getProperty("bintray.apikey")
+  }
+}
+
+publish {
+  userOrg = 'yan157'
+  groupId = 'com.yan.burial.method.timer'
+  bintrayUser = userName
+  bintrayKey = userKey
+  repoName = 'maven'
+  artifactId = 'burialtimer'
+  dryRun = false
+  publishVersion = '0.0.8'
+  desc = ""
+  website = 'https://github.com/genius158/burialPlugin'
+}
 
 android {
   compileSdkVersion 29

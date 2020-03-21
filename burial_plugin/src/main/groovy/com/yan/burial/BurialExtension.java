@@ -9,9 +9,21 @@ import java.util.Set;
 
 public class BurialExtension {
 
+  /**
+   * 那种编译状态下触发
+   */
   public RunVariant runVariant = RunVariant.ALWAYS;
-  public List<String> whitelist = new ArrayList<>();
-  public List<String> blacklist = new ArrayList<>();
+  /**
+   * 如果不为空，埋点只插入这个配置上的类
+   */
+  public List<String> foreList = new ArrayList<>();
+  /**
+   * 这个配置那些不需要插入代码的类
+   */
+  public List<String> ignoreList = new ArrayList<>();
+  /**
+   * 作用预
+   */
   public List<String> scopes = new ArrayList<>();
 
   public boolean duplicatedClassSafeMode = false;
@@ -20,8 +32,8 @@ public class BurialExtension {
   @Override public String toString() {
     return "BurialExtension{" +
         "runVariant=" + runVariant +
-        ", whitelist=" + whitelist +
-        ", blacklist=" + blacklist +
+        ", whitelist=" + foreList +
+        ", blacklist=" + ignoreList +
         ", scopes=" + scopes +
         ", duplicatedClassSafeMode=" + duplicatedClassSafeMode +
         ", logEnable=" + logEnable +
@@ -44,7 +56,7 @@ public class BurialExtension {
    * Local or remote dependencies that are provided-only
    * PROVIDED_ONLY(0x40),
    */
-  public Set<QualifiedContent.Scope> getScopes() {
+  Set<QualifiedContent.Scope> getScopes() {
     if (scopes == null || scopes.isEmpty()) return null;
     Set<QualifiedContent.Scope> scopeSet = new HashSet<>();
     for (String s : scopes) {
@@ -65,9 +77,9 @@ public class BurialExtension {
     return scopeSet;
   }
 
-  public boolean isInWhitelist(String fullQualifiedClassName) {
+  boolean isInWhitelist(String fullQualifiedClassName) {
     boolean inWhiteList = false;
-    for (String item : whitelist) {
+    for (String item : foreList) {
       if (fullQualifiedClassName.startsWith(item)) {
         inWhiteList = true;
         break;
@@ -76,9 +88,9 @@ public class BurialExtension {
     return inWhiteList;
   }
 
-  public boolean isInBlacklist(String fullQualifiedClassName) {
+  boolean isInBlacklist(String fullQualifiedClassName) {
     boolean inBlacklist = false;
-    for (String item : blacklist) {
+    for (String item : ignoreList) {
       if (fullQualifiedClassName.startsWith(item)) {
         inBlacklist = true;
         break;

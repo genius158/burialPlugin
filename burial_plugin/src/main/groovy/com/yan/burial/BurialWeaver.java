@@ -20,7 +20,7 @@ public final class BurialWeaver extends BaseWeaver {
     if (isByteCodePlugin) return false;
 
     if (burialExtension != null) {
-      if (!burialExtension.whitelist.isEmpty()) {
+      if (!burialExtension.foreList.isEmpty()) {
         return burialExtension.isInWhitelist(fullQualifiedClassName) && superResult;
       }
 

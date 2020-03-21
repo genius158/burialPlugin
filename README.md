@@ -1,5 +1,40 @@
 # BurialPlugin
 判断方法执行时间，插桩实现
+
+## how to use 
+in project mode
+```
+    classpath 'com.yan.burial:burial-plugin:1.0.2'
+```
+in app model
+```
+dependencies {
+    ...
+    implementation 'com.yan.burial.method.timer:burialtimer:0.0.8'
+}
+
+apply plugin: 'burial-plugin'
+
+burialExt {
+    logEnable = true
+    // 插件工作环境 DEBUG, RELEASE, ALWAYS, NEVER
+    runVariant = 'DEBUG'
+    // 只插桩到当前配置类  如果不为空，ignoreList失效
+    foreList = ['com.burial.test.TestView']
+    // 插桩忽略名单
+    // ignoreList = ['com.burial.test.MainActivity2']
+    // 作用域 PROJECT,SUB_PROJECTS,EXTERNAL_LIBRARIES,TESTED_CODE,PROVIDED_ONLY
+    scopes = ['PROJECT']
+}
+
+```
+int code
+``` 
+ BurialTimer.getTimer()
+    .setListener { ignore: BurialTimer?, className: String, methodName: String, des: String, cost: Long ->
+        Log.e("BurialTimer", "$cost  $className  $methodName  $des")
+    }
+```
 ## License
 
     Copyright 2020 genius158

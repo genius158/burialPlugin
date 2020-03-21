@@ -8,13 +8,13 @@ import org.objectweb.asm.commons.LocalVariablesSorter;
 public final class BurialMethodAdapter extends LocalVariablesSorter implements Opcodes {
   private int startVarIndex;
 
-  private String className;
+  private String classNamePath;
   private String methodDes;
 
   public BurialMethodAdapter(String className, String methodName, int access, String desc,
       MethodVisitor mv, BurialExtension burialExtension) {
     super(Opcodes.ASM5, access, desc, mv);
-    this.className = className;
+    this.classNamePath = className.replace(".","/");
     this.methodDes = desc;
   }
 
@@ -32,7 +32,7 @@ public final class BurialMethodAdapter extends LocalVariablesSorter implements O
   @Override
   public void visitInsn(int opcode) {
     if (((opcode >= IRETURN && opcode <= RETURN) || opcode == ATHROW)) {
-      mv.visitLdcInsn(Type.getType("L" + className + ";"));
+      mv.visitLdcInsn(Type.getType("L" + classNamePath + ";"));
       mv.visitLdcInsn(methodDes);
       mv.visitVarInsn(LLOAD, startVarIndex);
 

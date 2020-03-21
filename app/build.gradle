@@ -37,8 +37,10 @@ dependencies {
   implementation fileTree(include: ['*.jar'], dir: 'libs')
   implementation 'com.android.support:appcompat-v7:27.1.1'
   implementation 'org.apache.commons:commons-lang3:3.7'
-  implementation project(':burialTimer')
+  implementation 'com.yan.burial.method.timer:burialtimer:0.0.8'
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+
 }
 
 repositories {
@@ -58,7 +60,11 @@ apply plugin: 'burial-plugin'
 
 burialExt {
   logEnable = true
-  //  whitelist = ['com.quinn.hunter.debug.MainActivity2','com.quinn.hunter.debug.TestView']
-  //  blacklist = ['com.quinn.hunter.debug.MainActivity2']
+  runVariant = 'DEBUG'
+  // 只插桩到当前配置类，不为空，ignoreList失效
+  foreList = ['com.burial.test.TestView']
+  // 插桩忽略名单
+  // ignoreList = ['com.burial.test.MainActivity2']
+  // 作用域
   scopes = ['PROJECT']
 }

@@ -13,10 +13,7 @@ class MainActivity2 : Activity() {
     setContentView(layout.activity_main)
     BurialTimer.getTimer()
         .setListener { ignore: BurialTimer?, className: String, methodName: String, des: String, cost: Long ->
-          Log.e(
-              "BurialTimer",
-              "$cost  $className  $methodName  $des  $des"
-          )
+          Log.e("BurialTimer", "$cost  $className  $methodName  $des")
         }
     test3()
   }

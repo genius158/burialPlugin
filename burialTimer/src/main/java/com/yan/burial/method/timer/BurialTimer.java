@@ -24,21 +24,13 @@ public class BurialTimer {
     if (Looper.getMainLooper().getThread() != Thread.currentThread()) return;
 
     long cost = System.currentTimeMillis() - startTime;
-    StackTraceElement[] stes = Thread.currentThread().getStackTrace();
-    /*
-     * 0 = {StackTraceElement@8226} "dalvik.system.VMStack.getThreadStackTrace(Native Method)"
-     * 1 = {StackTraceElement@8227} "java.lang.Thread.getStackTrace(Thread.java:1720)"
-     * 2 = {StackTraceElement@8228} "com.yan.burial.method.timer.BurialTimer.timer(BurialTimer.java:22)"
-     * 3 = {StackTraceElement@8223} "current execute"
-     *
-     * 所以我们需要栈信息里的第4个
-     */
-    if (stes.length > 3) {
-      StackTraceElement ste = stes[3];
+    StackTraceElement[] sates = new Throwable().getStackTrace();
+
+    if (sates.length > 1) {
+      StackTraceElement ste = sates[1];
       Listener listener = getTimer().listener;
       if (listener != null) {
-        listener.timer(null, clazz.getName(), ste.getClassName() + "#" + ste.getMethodName(), des,
-            cost);
+        listener.timer(null, clazz.getName(), ste.getClassName() + "#" + ste.getMethodName(), des, cost);
       }
     }
   }

@@ -12,9 +12,7 @@ class MainActivity2 : Activity() {
     super.onCreate(savedInstanceState)
     setContentView(layout.activity_main)
     BurialTimer.getTimer()
-        .setListener { ignore: BurialTimer?, className: String, methodName: String, des: String, cost: Long ->
-          Log.e("BurialTimer", "$cost  $className  $methodName  $des")
-        }
+        .setListener { ignore, className, methodName, des, cost -> Log.e("BurialTimer", "$cost  $className  $methodName  $des") }
     test3()
   }
 
@@ -38,6 +36,7 @@ class MainActivity2 : Activity() {
 
   override fun onStart() {
     super.onStart()
+    Presenter().forClass()
   }
 
   override fun onPostResume() {

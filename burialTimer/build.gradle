@@ -27,7 +27,7 @@ publish {
   repoName = 'maven'
   artifactId = 'burialtimer'
   dryRun = false
-  publishVersion = '0.0.8'
+  publishVersion = '1.0.0'
   desc = ""
   website = 'https://github.com/genius158/burialPlugin'
 }

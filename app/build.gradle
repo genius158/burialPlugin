@@ -15,11 +15,13 @@ android {
 
   buildTypes {
     release {
-      minifyEnabled false
+      minifyEnabled true
+      shrinkResources true
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
     debug {
-      minifyEnabled false
+      shrinkResources true
+      minifyEnabled true
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
@@ -37,7 +39,8 @@ dependencies {
   implementation fileTree(include: ['*.jar'], dir: 'libs')
   implementation 'com.android.support:appcompat-v7:27.1.1'
   implementation 'org.apache.commons:commons-lang3:3.7'
-  implementation 'com.yan.burial.method.timer:burialtimer:0.0.8'
+//  implementation 'com.yan.burial.method.timer:burialtimer:0.0.8'
+  implementation project(path:':burialTimer')
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 
@@ -60,7 +63,8 @@ apply plugin: 'burial-plugin'
 
 burialExt {
   logEnable = true
-  runVariant = 'DEBUG'
+  // 插件工作环境 DEBUG, RELEASE, ALWAYS, NEVER
+  runVariant = 'ALWAYS'
   // 只插桩到当前配置类，不为空，ignoreList失效
   foreList = ['com.burial.test.TestView']
   // 插桩忽略名单

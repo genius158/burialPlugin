@@ -14,7 +14,7 @@ public final class BurialMethodAdapter extends LocalVariablesSorter implements O
   public BurialMethodAdapter(String className, String methodName, int access, String desc,
       MethodVisitor mv, BurialExtension burialExtension) {
     super(Opcodes.ASM5, access, desc, mv);
-    this.classNamePath = className.replace(".","/");
+    this.classNamePath = className.replace(".", "/");
     this.methodDes = desc;
   }
 
@@ -33,12 +33,16 @@ public final class BurialMethodAdapter extends LocalVariablesSorter implements O
   public void visitInsn(int opcode) {
     if (((opcode >= IRETURN && opcode <= RETURN) || opcode == ATHROW)) {
       mv.visitLdcInsn(Type.getType("L" + classNamePath + ";"));
-      mv.visitLdcInsn(methodDes);
+      mv.visitLdcInsn(reset(methodDes));
       mv.visitVarInsn(LLOAD, startVarIndex);
-
       mv.visitMethodInsn(INVOKESTATIC, "com/yan/burial/method/timer/BurialTimer",
           "timer", "(Ljava/lang/Class;Ljava/lang/String;J)V", false);
     }
     super.visitInsn(opcode);
+  }
+
+  private String reset(String methodDes) {
+    if (methodDes == null) return null;
+    return methodDes.replace("/", "0").replaceAll("L\\w+;", "L;");
   }
 }

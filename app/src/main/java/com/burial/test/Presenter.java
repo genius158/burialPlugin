@@ -4,14 +4,13 @@ public class Presenter {
   Presenter() {
   }
 
- public  void forClass(Class clazz) {
+  public void forClass(Class clazz) {
+  }
+
+  public void forClass() {
 
   }
 
-
-  public  void forClass() {
-
-  }
   public static void forClass(Object obj) {
 
   }

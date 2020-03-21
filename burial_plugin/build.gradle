@@ -23,16 +23,16 @@ repositories {
 }
 
 
-apply plugin: 'maven'
-group='com.yan.burial'
-version='0.0.1'
-uploadArchives {
-  repositories {
-    mavenDeployer {
-      repository(url: uri('plugins'))
-    }
-  }
-}
+//apply plugin: 'maven'
+//group='com.yan.burial'
+//version='0.0.1'
+//uploadArchives {
+//  repositories {
+//    mavenDeployer {
+//      repository(url: uri('plugins'))
+//    }
+//  }
+//}
 
 def userName
 def userKey
@@ -52,7 +52,7 @@ if (file.exists()) {
 }
 
 group 'com.yan.burial'
-version '1.0.2'
+version '1.0.3'
 
 apply plugin: 'maven-publish'
 
@@ -126,8 +126,8 @@ bintray {
       //name = '1.0-Final'//使用外面的version
       desc = 'burial-plugin'
       released = new Date()
-      vcsTag = '1.0.2' //版本控制里面的版本控制,比如svn,git
-      attributes = ['gradle-plugin': '1.0.2']
+      vcsTag = version //版本控制里面的版本控制,比如svn,git
+      attributes = ['gradle-plugin': version]
     }
   }
 }

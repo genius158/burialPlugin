@@ -43,17 +43,14 @@ public class TestView extends FrameLayout {
   }
 
   void test2() {
-    Log.e("test2",    new Throwable().getStackTrace()[0].getMethodName());
+    Log.e("test2", new Throwable().getStackTrace()[0].getMethodName());
     new Presenter2().forClass();
 
     Presenter2.forClass(p1);
   }
 
   void test3(Integer iin, Long l) {
-
-    for (int i = 0; i < 10000; i++) {
-      new Throwable().getStackTrace();
-      //Thread.currentThread().getStackTrace();
-    }
+    //new Throwable().getStackTrace();
+    //Thread.currentThread().getStackTrace();
   }
 }

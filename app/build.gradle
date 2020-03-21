@@ -66,9 +66,9 @@ burialExt {
   // 插件工作环境 DEBUG, RELEASE, ALWAYS, NEVER
   runVariant = 'ALWAYS'
   // 只插桩到当前配置类，不为空，ignoreList失效
-  foreList = ['com.burial.test.TestView']
+//  foreList = ['com.burial.test.TestView']
   // 插桩忽略名单
-  // ignoreList = ['com.burial.test.MainActivity2']
+   ignoreList = ['com.burial.test.ignorelist']
   // 作用域
   scopes = ['PROJECT']
 }

@@ -1,5 +1,5 @@
 # BurialPlugin
-
+判断方法执行时间，插桩实现
 ## License
 
     Copyright 2020 genius158

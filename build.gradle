@@ -1,36 +1,43 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    repositories {
-        google()
-        mavenLocal()
-        jcenter()
-        maven {
-            url uri('burial_plugin/plugins')
-        }
+  ext.kotlin_version = '1.3.70'
+  repositories {
+    google()
+    mavenLocal()
+    jcenter()
+    maven {
+      url uri('burial_plugin/plugins')
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.1'
-        classpath 'com.yan.burial:burial_plugin:0.0.1'
+  }
+  dependencies {
 
-        classpath 'com.novoda:bintray-release:0.8.1'
-    }
+    classpath 'com.android.tools.build:gradle:3.5.3'
+    classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+    classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+
+    classpath 'com.yan.burial:burial_plugin:0.0.1'
+
+    classpath 'com.novoda:bintray-release:0.8.1'
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+  }
 }
 
 allprojects {
-    repositories {
-        google()
-        mavenLocal()
-        jcenter()
+  repositories {
+    google()
+    mavenLocal()
+    jcenter()
 
-        maven {
-            url uri('burial_plugin/plugins')
-        }
+    maven {
+      url uri('burial_plugin/plugins')
     }
+  }
 }
 
 task clean(type: Delete) {
-    delete rootProject.buildDir
+  delete rootProject.buildDir
 }
+
+//tasks.getByPath(":androidlibrary:javadoc").enabled = false

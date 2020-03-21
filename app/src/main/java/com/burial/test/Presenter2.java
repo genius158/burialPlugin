@@ -1,13 +1,12 @@
 package com.burial.test;
 
-public class Presenter {
-  Presenter() {
+public class Presenter2 {
+  Presenter2() {
   }
 
  public  void forClass(Class clazz) {
 
   }
-
 
   public  void forClass() {
 

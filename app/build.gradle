@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
   compileSdkVersion 28
@@ -13,6 +15,10 @@ android {
 
   buildTypes {
     release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+    debug {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
@@ -32,7 +38,7 @@ dependencies {
   implementation 'com.android.support:appcompat-v7:27.1.1'
   implementation 'org.apache.commons:commons-lang3:3.7'
   implementation project(':burialTimer')
-
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 repositories {
@@ -51,9 +57,8 @@ buildscript {
 apply plugin: 'burial-plugin'
 
 burialExt {
-  runVariant = 'DEBUG'
   logEnable = true
   //  whitelist = ['com.quinn.hunter.debug.MainActivity2','com.quinn.hunter.debug.TestView']
-//  blacklist = ['com.quinn.hunter.debug.MainActivity2']
+  //  blacklist = ['com.quinn.hunter.debug.MainActivity2']
   scopes = ['PROJECT']
 }

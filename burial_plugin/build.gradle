@@ -25,7 +25,7 @@ repositories {
 
 //apply plugin: 'maven'
 //group='com.yan.burial'
-//version='0.0.1'
+//version='0.0.2'
 //uploadArchives {
 //  repositories {
 //    mavenDeployer {
@@ -34,28 +34,103 @@ repositories {
 //  }
 //}
 
-ext {
-  bintrayRepo = 'genius158'
-  bintrayName = 'burial-plugin'
-  publishedGroupId = 'com.yan.burial'
-  libraryName = 'burial-plugin'
-  artifact = 'burial-plugin'
+def userName
+def userKey
+File file = rootProject.file('local.properties')
+if (file.exists()) {
+  //加载资源
+  InputStream inputStream = rootProject.file('local.properties').newDataInputStream();
+  Properties properties = new Properties()
+  properties.load(inputStream)
 
-  libraryDescription = 'burial'
-
-  siteUrl = 'https://github.com/genius158/burialPlugin'
-  gitUrl = 'https://github.com/genius158/burialPlugin.git'
-
-  libraryVersion = "0.0.7"
-
-  developerId = 'yan158'
-  developerName = 'genius158'
-  developerEmail = 'yxw1114@gmail.com'
-
-  licenseName = 'The Apache Software License, Version 2.0'
-  licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-  allLicenses = ["Apache-2.0"]
+  if (properties.containsKey("bintray.user")) {
+    userName = properties.getProperty("bintray.user")
+  }
+  if (properties.containsKey("bintray.apikey")) {
+    userKey = properties.getProperty("bintray.apikey")
+  }
 }
 
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
+
+group 'com.yan.burial'
+version '1.0.0'
+
+apply plugin: 'maven-publish'
+
+//源代码打包任务
+task sourcesJar(type: Jar) {
+  baseName 'test'
+  classifier 'sources' //分类器,区分其他jar包
+  from sourceSets.main.allSource
+}
+
+//文档包任务
+task docJar(type: Jar, dependsOn: [javadoc, groovydoc]) {
+  baseName 'test'
+  classifier 'doc' //分类器,区分其他jar包
+  from javadoc.destinationDir, groovydoc.destinationDir
+}
+
+//配置工程工件,也就是jar产出的配置
+artifacts {
+  archives sourcesJar
+  archives docJar
+}
+
+//上传配置
+publishing {
+  publications {
+    plugin(MavenPublication) {
+      from components.java
+      //如果不指定，默认就是工程名
+      artifactId 'burial-plugin'
+
+      artifact sourcesJar
+      artifact docJar
+
+      //pom文件配置
+      pom.withXml {
+        def root = asNode()
+        def licensesNode = root.appendNode('licenses').appendNode('license')
+        licensesNode.appendNode('name', 'Apache License, Version 2.0')
+        licensesNode.appendNode('url', 'https://www.apache.org/licenses/LICENSE-2.0.txt')
+        licensesNode.appendNode('distribution', 'repo')
+        licensesNode.appendNode('comments', 'A business-friendly OSS license')
+      }
+    }
+  }
+}
+
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+  }
+}
+apply plugin: 'com.jfrog.bintray'
+
+bintray {
+  user = userName
+  key = userKey
+  //上传的内容
+  publications = ['plugin']
+  pkg {
+    repo = 'maven' //需要上传的仓库名
+    name = 'burial-plugin' //上传到jcenter的项目名
+    userOrg = 'yan157' //可选的,不传的话默认是上面的user
+    licenses = ['Apache-2.0'] //开源许可
+    //这里的地址是不会验证的,随便输入都可以,不配置也可以
+    vcsUrl = 'https://xxx.git'
+    version {
+      //name = '1.0-Final'//使用外面的version
+      desc = 'burial-plugin'
+      released = new Date()
+      vcsTag = '1.0.0' //版本控制里面的版本控制,比如svn,git
+      attributes = ['gradle-plugin': '1.0.0']
+    }
+  }
+}

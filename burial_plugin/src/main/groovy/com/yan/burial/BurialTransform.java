@@ -14,23 +14,22 @@ import org.gradle.api.Project;
 
 public final class BurialTransform extends HunterTransform {
   private BurialExtension burialExtension;
-  private Project project;
 
   public BurialTransform(Project project) {
     super(project);
-    this.project = project;
     burialExtension = project.getExtensions().create("burialExt", BurialExtension.class);
+    BurialLog.logEnable = burialExtension.logEnable;
+
     this.bytecodeWeaver = new BurialWeaver(burialExtension);
+    BurialLog.logger.info("BurialExtension:" + burialExtension.toString());
   }
 
   @Override
   public void transform(Context context, Collection<TransformInput> inputs,
       Collection<TransformInput> referencedInputs, TransformOutputProvider outputProvider,
       boolean isIncremental) throws IOException, TransformException, InterruptedException {
-    burialExtension = (BurialExtension) project.getExtensions().getByName("burialExt");
     bytecodeWeaver.setExtension(burialExtension);
-    BurialLog.logEnable = burialExtension.logEnable;
-    BurialLog.info("BurialExtension:" + burialExtension.toString());
+    BurialLog.logger.info("BurialExtension:" + burialExtension.toString());
     super.transform(context, inputs, referencedInputs, outputProvider, isIncremental);
   }
 

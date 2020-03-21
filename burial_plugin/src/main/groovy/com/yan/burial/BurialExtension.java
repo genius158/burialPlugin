@@ -13,8 +13,9 @@ public class BurialExtension {
   public List<String> whitelist = new ArrayList<>();
   public List<String> blacklist = new ArrayList<>();
   public List<String> scopes = new ArrayList<>();
+
   public boolean duplicatedClassSafeMode = false;
-  public boolean logEnable = false;
+  public boolean logEnable = true;
 
   @Override public String toString() {
     return "BurialExtension{" +
@@ -62,5 +63,27 @@ public class BurialExtension {
     }
     if (scopeSet.isEmpty()) return null;
     return scopeSet;
+  }
+
+  public boolean isInWhitelist(String fullQualifiedClassName) {
+    boolean inWhiteList = false;
+    for (String item : whitelist) {
+      if (fullQualifiedClassName.startsWith(item)) {
+        inWhiteList = true;
+        break;
+      }
+    }
+    return inWhiteList;
+  }
+
+  public boolean isInBlacklist(String fullQualifiedClassName) {
+    boolean inBlacklist = false;
+    for (String item : blacklist) {
+      if (fullQualifiedClassName.startsWith(item)) {
+        inBlacklist = true;
+        break;
+      }
+    }
+    return inBlacklist;
   }
 }

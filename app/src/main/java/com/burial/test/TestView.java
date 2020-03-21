@@ -31,4 +31,23 @@ public class TestView extends FrameLayout {
   @Override protected void onDraw(Canvas canvas) {
     super.onDraw(canvas);
   }
+
+  Presenter2 p1 = new Presenter2();
+
+  void test1() {
+    p1.forClass();
+    Presenter2.forClass(p1);
+  }
+
+  void test2() {
+    new Presenter2().forClass();
+
+    Presenter2.forClass(p1);
+  }
+
+  void test3() {
+    Presenter2 p3 = new Presenter2();
+    p3.forClass();
+    Presenter2.forClass(p3);
+  }
 }

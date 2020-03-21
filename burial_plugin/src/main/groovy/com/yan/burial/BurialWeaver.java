@@ -18,34 +18,19 @@ public final class BurialWeaver extends BaseWeaver {
     boolean superResult = super.isWeavableClass(fullQualifiedClassName);
     boolean isByteCodePlugin = fullQualifiedClassName.startsWith(PLUGIN_LIBRARY);
     if (isByteCodePlugin) return false;
+
     if (burialExtension != null) {
-      //whitelist is prior to to blacklist
       if (!burialExtension.whitelist.isEmpty()) {
-        boolean inWhiteList = false;
-        for (String item : burialExtension.whitelist) {
-          if (fullQualifiedClassName.startsWith(item)) {
-            inWhiteList = true;
-            break;
-          }
-        }
-        return superResult && inWhiteList;
+        return burialExtension.isInWhitelist(fullQualifiedClassName) && superResult;
       }
-      if (!burialExtension.blacklist.isEmpty()) {
-        boolean inBlackList = false;
-        for (String item : burialExtension.blacklist) {
-          if (fullQualifiedClassName.startsWith(item)) {
-            inBlackList = true;
-            break;
-          }
-        }
-        return superResult && !inBlackList;
-      }
+
+      if (burialExtension.isInBlacklist(fullQualifiedClassName)) return !superResult;
     }
     return superResult;
   }
 
   @Override
   protected ClassVisitor wrapClassWriter(ClassWriter classWriter) {
-    return new BurialClassAdapter(classWriter);
+    return new BurialClassAdapter(classWriter, burialExtension);
   }
 }

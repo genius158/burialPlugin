@@ -10,9 +10,11 @@ public final class BurialClassAdapter extends ClassVisitor {
   private String className;
   private String pluginPatch;
   private boolean isPluginInterface;
+  private BurialExtension burialExtension;
 
-  BurialClassAdapter(final ClassVisitor cv) {
+  BurialClassAdapter(final ClassVisitor cv, BurialExtension burialExtension) {
     super(Opcodes.ASM5, cv);
+    this.burialExtension = burialExtension;
     pluginPatch = BurialWeaver.PLUGIN_LIBRARY.replace(".", "/");
   }
 
@@ -20,11 +22,11 @@ public final class BurialClassAdapter extends ClassVisitor {
   public void visit(int version, int access, String name, String signature, String superName,
       String[] interfaces) {
     super.visit(version, access, name, signature, superName, interfaces);
-    this.className = name;
+    this.className = name.replace("/", ".");
     String interfacesStr = Arrays.toString(interfaces);
     isPluginInterface = interfacesStr.contains(pluginPatch);
     BurialLog.info(
-        "BurialPlugin: -visit- className:" + className
+        " -visit- className:" + className
             + " access:" + access
             + " version:" + version
             + " signature:" + signature
@@ -42,7 +44,7 @@ public final class BurialClassAdapter extends ClassVisitor {
       return mv;
     }
     BurialLog.info(
-        "BurialPlugin: -visitMethod- className:" + className
+        " -visitMethod- className:" + className
             + " access:" + access
             + " methodName:" + name
             + " methodDesc:" + desc
@@ -50,6 +52,6 @@ public final class BurialClassAdapter extends ClassVisitor {
             + " exceptions:" + Arrays.toString(exceptions)
     );
     return mv == null ? null
-        : new BurialMethodAdapter(className, name, access, desc, mv);
+        : new BurialMethodAdapter(className, name, access, desc, mv, burialExtension);
   }
 }

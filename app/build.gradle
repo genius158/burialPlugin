@@ -20,8 +20,8 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
     debug {
-      shrinkResources true
-      minifyEnabled true
+//      shrinkResources true
+//      minifyEnabled true
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
@@ -63,6 +63,8 @@ apply plugin: 'burial-plugin'
 
 burialExt {
   logEnable = true
+  // 是否在代码里插入方法名，提高性能，但是会暴露方法的原本信息
+  listenerWithMethodDetail = true
   // 插件工作环境 DEBUG, RELEASE, ALWAYS, NEVER
   runVariant = 'ALWAYS'
   // 只插桩到当前配置类，不为空，ignoreList失效

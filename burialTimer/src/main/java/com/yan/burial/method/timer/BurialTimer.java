@@ -19,18 +19,26 @@ public class BurialTimer {
     this.listener = listener;
   }
 
-  public static void timer(Class clazz, String des, long startTime) {
+  public static void timer(Class clazz, String method, String des, long startTime) {
     /*非主线程不统计*/
     if (Looper.getMainLooper().getThread() != Thread.currentThread()) return;
-
     long cost = System.currentTimeMillis() - startTime;
-    StackTraceElement[] sates = new Throwable().getStackTrace();
 
+    Listener listener = getTimer().listener;
+    String clazzName = clazz.getName();
+    if (method != null) {
+      if (listener != null) {
+        listener.timer(null, clazzName, clazzName + "#" + method, des, cost);
+      }
+      return;
+    }
+
+    StackTraceElement[] sates = new Throwable().getStackTrace();
     if (sates.length > 1) {
       StackTraceElement ste = sates[1];
-      Listener listener = getTimer().listener;
       if (listener != null) {
-        listener.timer(null, clazz.getName(), ste.getClassName() + "#" + ste.getMethodName(), des, cost);
+        listener.timer(null, clazzName, ste.getClassName() + "#" + ste.getMethodName(), des,
+            cost);
       }
     }
   }

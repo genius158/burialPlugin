@@ -27,34 +27,39 @@
     ...
     // 方法结束时回调
     // 1.第一个参数返回了类对象，为什么要返回这个参数，因为我们有些时候需要获取执行的类信息（父类、接口等）
-    // 2.如果放回类名，处理前面说的问题，如果我们要获取类对象，我们的对应可能被混淆，直接Class.for还可能
+    // 如果放回类名，处理前面说的问题，如果我们要获取类对象，我们的对应可能被混淆，直接Class.for还可能
     // 找不到
-    // 3.(L;I)V这个是方法参数返回值类型，对象类型只会有L前缀，弥补getStackTrace()没有对应的参数
+    // 2.(String)null 方法名，listenerWithMethodDetail为ture时放回，性能强于getStackTrace()
+    // 不过存在方法名暴露问题
+    // 3.(L;I)V这个是方法参数返回值类型，对象类型只会有L前缀（listenerWithMethodDetail为ture,放回L+参数类型短名称）
+    //，弥补getStackTrace()没有对应的参数
     //
     //
     // 方法名查询使用了new Throwable().getStackTrace()，弥补执行方法没有传入的问题
     // new Throwable().getStackTrace()用一个7.0的老的手机循环大于十次执行时间才会超过1ms
     // 相比 Thread.currentThread().getStackTrace(),性能测试稍微好一点
     //
-    BurialTimer.timer(Test.class, "(L;I)V", start);
+    BurialTimer.timer(Test.class,(String)null, "(L;I)V", start);
 ```
 
 ## how to use 
 in project mode
 ```
-    classpath 'com.yan.burial:burial-plugin:1.0.3'
+    classpath 'com.yan.burial:burial-plugin:1.0.4'
 ```
 in app model
 ```
 dependencies {
     ...
-    implementation 'com.yan.burial.method.timer:burialtimer:1.0.0'
+    implementation 'com.yan.burial.method.timer:burialtimer:1.0.4'
 }
 
 apply plugin: 'burial-plugin'
 
 burialExt {
     logEnable = true
+    // 是否在代码里插入方法名，提高性能，但是会暴露方法的原本信息
+    listenerWithMethodDetail = true
     // 插件工作环境 DEBUG, RELEASE, ALWAYS, NEVER
     runVariant = 'DEBUG'
     // 只插桩到当前匹配的所有类 如果不为空，ignoreList失效 ，内部采用 startsWith(item)，来剔除对应的类

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.FrameLayout;
 
 public class TestView extends FrameLayout {
@@ -43,14 +42,18 @@ public class TestView extends FrameLayout {
   }
 
   void test2() {
-    Log.e("test2", new Throwable().getStackTrace()[0].getMethodName());
-    new Presenter2().forClass();
+    //Log.e("test2",    new Throwable().getStackTrace()[0].getMethodName());
+    //new Presenter2().forClass();
 
     Presenter2.forClass(p1);
   }
 
   void test3(Integer iin, Long l) {
-    //new Throwable().getStackTrace();
-    //Thread.currentThread().getStackTrace();
+    test2();
+
+    //for (int i = 0; i < 1; i++) {
+    //  new Throwable().getStackTrace();
+      //Thread.currentThread().getStackTrace();
+    //}
   }
 }

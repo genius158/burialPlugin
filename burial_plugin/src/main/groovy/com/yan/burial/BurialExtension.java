@@ -27,7 +27,8 @@ public class BurialExtension {
   public List<String> scopes = new ArrayList<>();
 
   public boolean duplicatedClassSafeMode = false;
-  public boolean logEnable = true;
+  public boolean logEnable = false;
+  public boolean listenerWithMethodDetail = true;
 
   @Override public String toString() {
     return "BurialExtension{" +
@@ -37,6 +38,7 @@ public class BurialExtension {
         ", scopes=" + scopes +
         ", duplicatedClassSafeMode=" + duplicatedClassSafeMode +
         ", logEnable=" + logEnable +
+        ", logEnable=" + listenerWithMethodDetail +
         '}';
   }
 

@@ -52,7 +52,7 @@ if (file.exists()) {
 }
 
 group 'com.yan.burial'
-version '1.0.3'
+version '1.0.4'
 
 apply plugin: 'maven-publish'
 

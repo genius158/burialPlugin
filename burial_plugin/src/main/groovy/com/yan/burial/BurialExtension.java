@@ -82,7 +82,7 @@ public class BurialExtension {
   boolean isInWhitelist(String fullQualifiedClassName) {
     boolean inWhiteList = false;
     for (String item : foreList) {
-      if (fullQualifiedClassName.startsWith(item)) {
+      if (fullQualifiedClassName.contains(item)) {
         inWhiteList = true;
         break;
       }
@@ -93,7 +93,7 @@ public class BurialExtension {
   boolean isInBlacklist(String fullQualifiedClassName) {
     boolean inBlacklist = false;
     for (String item : ignoreList) {
-      if (fullQualifiedClassName.startsWith(item)) {
+      if (fullQualifiedClassName.contains(item)) {
         inBlacklist = true;
         break;
       }

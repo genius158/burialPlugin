@@ -45,7 +45,7 @@
 ## how to use 
 in project mode
 ```
-    classpath 'com.yan.burial:burial-plugin:1.0.4'
+    classpath 'com.yan.burial:burial-plugin:1.0.5'
 ```
 in app model
 ```
@@ -62,9 +62,9 @@ burialExt {
     listenerWithMethodDetail = true
     // 插件工作环境 DEBUG, RELEASE, ALWAYS, NEVER
     runVariant = 'DEBUG'
-    // 只插桩到当前匹配的所有类 如果不为空，ignoreList失效 ，内部采用 startsWith(item)，来剔除对应的类
+    // 只插桩到当前匹配的所有类 如果不为空，ignoreList失效 ，内部采用 contains(item)，来包涵匹配到的类
     foreList = ['com.burial.test.TestView']
-    // 插桩忽略名单，不需要全类名，内部采用 startsWith(item)，来剔除对应的类
+    // 插桩忽略名单，不需要全类名，内部采用 contains(item)，来剔除配到的类
     // ignoreList = ['com.burial.test.MainActivity2']
     // 作用域 PROJECT,SUB_PROJECTS,EXTERNAL_LIBRARIES,TESTED_CODE,PROVIDED_ONLY
     scopes = ['PROJECT']

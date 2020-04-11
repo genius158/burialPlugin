@@ -5,6 +5,11 @@ import android.os.Looper;
 public class BurialTimer {
   private volatile static BurialTimer timer;
   private Listener listener;
+  private volatile static boolean isOnlyUIThread = true;
+
+  public static void setIsOnlyUIThread(boolean onlyUIThread) {
+    isOnlyUIThread = onlyUIThread;
+  }
 
   public static BurialTimer getTimer() {
     if (timer == null) {
@@ -21,7 +26,7 @@ public class BurialTimer {
 
   public static void timer(Class clazz, String method, String des, long startTime) {
     /*非主线程不统计*/
-    if (Looper.getMainLooper().getThread() != Thread.currentThread()) return;
+    if (isOnlyUIThread && Looper.getMainLooper().getThread() != Thread.currentThread()) return;
     long cost = System.currentTimeMillis() - startTime;
 
     Listener listener = getTimer().listener;

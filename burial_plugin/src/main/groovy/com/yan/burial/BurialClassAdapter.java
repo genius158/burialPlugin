@@ -13,7 +13,7 @@ public final class BurialClassAdapter extends ClassVisitor {
   private BurialExtension burialExtension;
 
   BurialClassAdapter(final ClassVisitor cv, BurialExtension burialExtension) {
-    super(Opcodes.ASM5, cv);
+    super(Opcodes.ASM6, cv);
     this.burialExtension = burialExtension;
     pluginPatch = BurialWeaver.PLUGIN_LIBRARY.replace(".", "/");
   }
@@ -22,7 +22,8 @@ public final class BurialClassAdapter extends ClassVisitor {
   public void visit(int version, int access, String name, String signature, String superName,
       String[] interfaces) {
     super.visit(version, access, name, signature, superName, interfaces);
-    this.className = name.replace("/", ".");
+    if (name!=null) this.className = name.replace("/", ".");
+
     String interfacesStr = Arrays.toString(interfaces);
     isPluginInterface = interfacesStr.contains(pluginPatch);
     BurialLog.info(

@@ -45,13 +45,13 @@
 ## how to use 
 in project mode
 ```
-    classpath 'com.yan.burial:burial-plugin:1.0.5'
+    classpath 'com.yan.burial:burial-plugin:1.0.6'
 ```
 in app model
 ```
 dependencies {
     ...
-    implementation 'com.yan.burial.method.timer:burialtimer:1.0.4'
+    implementation 'com.yan.burial.method.timer:burialtimer:1.0.6'
 }
 
 apply plugin: 'burial-plugin'

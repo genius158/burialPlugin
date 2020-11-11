@@ -33,19 +33,19 @@
     <dependency>
       <groupId>org.ow2.asm</groupId>
       <artifactId>asm</artifactId>
-      <version>5.1</version>
+      <version>6.2.1</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.ow2.asm</groupId>
       <artifactId>asm-util</artifactId>
-      <version>5.1</version>
+      <version>6.2.1</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.ow2.asm</groupId>
       <artifactId>asm-commons</artifactId>
-      <version>5.1</version>
+      <version>6.2.1</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>

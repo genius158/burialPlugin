@@ -39,11 +39,9 @@ dependencies {
   implementation fileTree(include: ['*.jar'], dir: 'libs')
   implementation 'com.android.support:appcompat-v7:27.1.1'
   implementation 'org.apache.commons:commons-lang3:3.7'
-//  implementation 'com.yan.burial.method.timer:burialtimer:0.0.8'
-  implementation project(path:':burialTimer')
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-
+implementation 'androidx.annotation:annotation:1.1.0'
 }
 
 repositories {

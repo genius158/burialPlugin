@@ -45,15 +45,9 @@
 ## how to use 
 in project mode
 ```
-    classpath 'com.yan.burial:burial-plugin:1.0.6'
+    classpath 'com.yan.burial:burial-plugin:1.0.7'
 ```
-in app model
 ```
-dependencies {
-    ...
-    implementation 'com.yan.burial.method.timer:burialtimer:1.0.6'
-}
-
 apply plugin: 'burial-plugin'
 
 burialExt {

@@ -8,7 +8,7 @@ android {
   defaultConfig {
     applicationId "com.burial.test"
     minSdkVersion 15
-    targetSdkVersion 28
+    targetSdkVersion 30
     versionCode 1
     versionName "1.0"
   }
@@ -39,6 +39,7 @@ dependencies {
   implementation fileTree(include: ['*.jar'], dir: 'libs')
   implementation 'com.android.support:appcompat-v7:27.1.1'
   implementation 'org.apache.commons:commons-lang3:3.7'
+//  implementation project(path:":test")
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 implementation 'androidx.annotation:annotation:1.1.0'
@@ -56,19 +57,4 @@ buildscript {
     google()
     mavenLocal()
   }
-}
-apply plugin: 'burial-plugin'
-
-burialExt {
-  logEnable = true
-  // 是否在代码里插入方法名，提高性能，但是会暴露方法的原本信息
-  listenerWithMethodDetail = true
-  // 插件工作环境 DEBUG, RELEASE, ALWAYS, NEVER
-  runVariant = 'ALWAYS'
-  // 只插桩到当前配置类，不为空，ignoreList失效
-//  foreList = ['com.burial.test.TestView']
-  // 插桩忽略名单
-   ignoreList = ['com.burial.test.ignorelist']
-  // 作用域
-  scopes = ['PROJECT']
 }

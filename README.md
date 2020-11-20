@@ -47,6 +47,7 @@ in project mode
 ```
     classpath 'com.yan.burial:burial-plugin:1.0.7'
 ```
+ in app module
 ```
 apply plugin: 'burial-plugin'
 
@@ -65,7 +66,7 @@ burialExt {
 }
 
 ```
-int code
+ int code 内部有默认实现[DefaultListener](https://github.com/genius158/burialPlugin/blob/master/burialTimer/src/main/java/com/yan/burial/method/timer/DefaultListener.java)
 ``` 
  BurialTimer.getTimer()
     .setListener { ignore: BurialTimer?, className: String, methodName: String, des: String, cost: Long ->

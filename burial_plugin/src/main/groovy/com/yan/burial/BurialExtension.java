@@ -1,12 +1,13 @@
 package com.yan.burial;
 
 import com.android.build.api.transform.QualifiedContent;
-import com.quinn.hunter.transform.RunVariant;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import quinn.hunter.bltransform.RunVariant;
 
 public class BurialExtension {
 

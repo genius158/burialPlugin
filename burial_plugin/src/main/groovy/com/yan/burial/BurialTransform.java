@@ -5,14 +5,15 @@ import com.android.build.api.transform.QualifiedContent;
 import com.android.build.api.transform.TransformException;
 import com.android.build.api.transform.TransformInput;
 import com.android.build.api.transform.TransformOutputProvider;
-import com.quinn.hunter.transform.HunterTransform;
-import com.quinn.hunter.transform.RunVariant;
 
 import org.gradle.api.Project;
 
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Set;
+
+import quinn.hunter.bltransform.HunterTransform;
+import quinn.hunter.bltransform.RunVariant;
 
 public final class BurialTransform extends HunterTransform {
   private BurialExtension burialExtension;
@@ -27,7 +28,6 @@ public final class BurialTransform extends HunterTransform {
   public void transform(Context context, Collection<TransformInput> inputs,
       Collection<TransformInput> referencedInputs, TransformOutputProvider outputProvider,
       boolean isIncremental) throws IOException, TransformException, InterruptedException {
-    bytecodeWeaver.setExtension(burialExtension);
     BurialLog.logEnable = burialExtension.logEnable;
     BurialLog.info("BurialExtension:" + burialExtension.toString());
     super.transform(context, inputs, referencedInputs, outputProvider, isIncremental);
@@ -46,8 +46,4 @@ public final class BurialTransform extends HunterTransform {
     return super.getScopes();
   }
 
-  @Override
-  protected boolean inDuplcatedClassSafeMode() {
-    return burialExtension.duplicatedClassSafeMode;
-  }
 }

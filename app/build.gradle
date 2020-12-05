@@ -20,8 +20,8 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
     debug {
-      shrinkResources true
-      minifyEnabled true
+      shrinkResources false
+      minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
@@ -58,3 +58,20 @@ buildscript {
     mavenLocal()
   }
 }
+
+apply plugin: 'burial-plugin'
+
+burialExt {
+  logEnable = true
+  // 是否在代码里插入方法名，提高性能，但是会暴露方法的原本信息
+  listenerWithMethodDetail = true
+  // 插件工作环境 DEBUG, RELEASE, ALWAYS, NEVER
+  runVariant = 'ALWAYS'
+  // 只插桩到当前配置类，不为空，ignoreList失效
+//  foreList = ['com.burial.test.TestView']
+  // 插桩忽略名单
+  ignoreList = ['com.burial.test.ignorelist']
+  // 作用域
+  scopes = ['PROJECT','SUB_PROJECTS','EXTERNAL_LIBRARIES']
+}
+

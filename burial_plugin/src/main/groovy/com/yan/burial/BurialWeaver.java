@@ -1,11 +1,13 @@
 package com.yan.burial;
 
 import com.quinn.hunter.transform.asm.BaseWeaver;
+
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
 
+import static com.yan.burial.BurialExtension.PLUGIN_LIBRARY;
+
 public final class BurialWeaver extends BaseWeaver {
-  static final String PLUGIN_LIBRARY = "com.yan.burial.method.timer";
 
   private BurialExtension burialExtension;
 
@@ -16,7 +18,7 @@ public final class BurialWeaver extends BaseWeaver {
   @Override
   public boolean isWeavableClass(String fullQualifiedClassName) {
     boolean superResult = super.isWeavableClass(fullQualifiedClassName);
-    boolean isByteCodePlugin = fullQualifiedClassName.startsWith(PLUGIN_LIBRARY);
+    boolean isByteCodePlugin = fullQualifiedClassName.contains(PLUGIN_LIBRARY);
     if (isByteCodePlugin) return false;
 
     if (burialExtension != null) {

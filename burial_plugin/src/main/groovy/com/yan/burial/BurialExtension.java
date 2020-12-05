@@ -2,6 +2,7 @@ package com.yan.burial;
 
 import com.android.build.api.transform.QualifiedContent;
 import com.quinn.hunter.transform.RunVariant;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -100,4 +101,7 @@ public class BurialExtension {
     }
     return inBlacklist;
   }
+
+  static final String PLUGIN_LIBRARY = "com.yan.burial.method.timer";
+
 }

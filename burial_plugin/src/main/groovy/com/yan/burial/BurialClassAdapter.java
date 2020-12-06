@@ -27,14 +27,6 @@ public final class BurialClassAdapter extends ClassVisitor {
 
         String interfacesStr = Arrays.toString(interfaces);
         isPluginInterface = interfacesStr.contains(pluginPatch);
-        BurialLog.info(
-                " -visit- className:" + className
-                        + " access:" + access
-                        + " version:" + version
-                        + " signature:" + signature
-                        + " superName:" + superName
-                        + " interfaces:" + interfacesStr
-        );
     }
 
     @Override
@@ -45,12 +37,7 @@ public final class BurialClassAdapter extends ClassVisitor {
             return cv.visitMethod(access, name, desc, signature, exceptions);
         }
         BurialLog.info(
-                " -visitMethod- className:" + className
-                        + " access:" + access
-                        + " methodName:" + name
-                        + " methodDesc:" + desc
-                        + " signature:" + signature
-                        + " exceptions:" + Arrays.toString(exceptions)
+                " -visitMethod- className:" + className + " access:" + access + " methodName:" + name + " methodDesc:" + desc + " interfacesStr:"
         );
         MethodVisitor mcv = cv.visitMethod(access, name, desc, signature, exceptions);
         return mcv == null ? null

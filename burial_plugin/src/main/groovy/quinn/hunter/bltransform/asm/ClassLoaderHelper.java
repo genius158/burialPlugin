@@ -4,10 +4,13 @@ import com.android.build.api.transform.DirectoryInput;
 import com.android.build.api.transform.JarInput;
 import com.android.build.api.transform.TransformInput;
 import com.android.build.gradle.AppExtension;
+import com.android.build.gradle.BaseExtension;
+import com.android.build.gradle.LibraryExtension;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
 import org.gradle.api.Project;
+import org.gradle.api.UnknownDomainObjectException;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -50,12 +53,24 @@ public class ClassLoaderHelper {
      * /Users/quinn/Documents/Android/SDK/platforms/android-28/android.jar
      */
     private static String getAndroidJarPath(Project project) {
-        AppExtension appExtension = (AppExtension)project.getProperties().get("android");
-        String sdkDirectory = appExtension.getSdkDirectory().getAbsolutePath();
-        String compileSdkVersion = appExtension.getCompileSdkVersion();
+        BaseExtension extension = findExtension(project);
+        String sdkDirectory = extension.getSdkDirectory().getAbsolutePath();
+        String compileSdkVersion = extension.getCompileSdkVersion();
         sdkDirectory = sdkDirectory + File.separator + "platforms" + File.separator;
         return sdkDirectory + compileSdkVersion + File.separator + "android.jar";
     }
 
+    static BaseExtension findExtension(Project project) {
+        BaseExtension extension = null;
+        try {
+            extension = project.getExtensions().getByType(AppExtension.class);
+        } catch (UnknownDomainObjectException e) {
+            try {
+                extension = project.getExtensions().getByType(LibraryExtension.class);
+            } catch (UnknownDomainObjectException ignore) {
+            }
+        }
+        return extension;
+    }
 
 }

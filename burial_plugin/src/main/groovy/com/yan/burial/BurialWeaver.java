@@ -21,17 +21,18 @@ public final class BurialWeaver extends BaseWeaver {
     @Override
     public boolean isWeavableClass(QualifiedContent input, String fullQualifiedClassName) {
         boolean superResult = super.isWeavableClass(input, fullQualifiedClassName);
+        if (!superResult) return false;
         boolean isByteCodePlugin = fullQualifiedClassName.contains(PLUGIN_LIBRARY);
         if (isByteCodePlugin) return false;
 
         if (burialExtension != null) {
             if (!burialExtension.foreList.isEmpty()) {
-                return burialExtension.isInWhitelist(fullQualifiedClassName) && superResult;
+                return burialExtension.isInWhitelist(fullQualifiedClassName);
             }
 
-            if (burialExtension.isInBlacklist(fullQualifiedClassName)) return !superResult;
+            return !burialExtension.isInBlacklist(fullQualifiedClassName);
         }
-        return superResult;
+        return true;
     }
 
     @Override

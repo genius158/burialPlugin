@@ -26,6 +26,16 @@ public final class BurialMethodAdapter extends LocalVariablesSorter implements O
 
   @Override public void visitCode() {
     super.visitCode();
+    mv.visitLdcInsn(Type.getType("L" + classNamePath + ";"));
+    if (backMethodDetail()) {
+      mv.visitLdcInsn(methodName);
+    } else {
+      mv.visitInsn(ACONST_NULL);
+    }
+    mv.visitLdcInsn(reset(methodDes));
+    mv.visitMethodInsn(INVOKESTATIC, "com/yan/burial/method/timer/BurialTimer",
+            "timerEntry", "(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;)V", false);
+
     mv.visitMethodInsn(Opcodes.INVOKESTATIC, "java/lang/System", "currentTimeMillis", "()J", false);
     startVarIndex = newLocal(Type.LONG_TYPE);
     mv.visitVarInsn(Opcodes.LSTORE, startVarIndex);

@@ -51,75 +51,75 @@ if (file.exists()) {
   }
 }
 
-group 'com.yan.burial'
-version '1.1.4'
-
-apply plugin: 'maven-publish'
-
-//源代码打包任务
-task sourcesJar(type: Jar) {
-  baseName 'test'
-  classifier 'sources' //分类器,区分其他jar包
-  from sourceSets.main.allSource
-}
-
-//文档包任务
-task docJar(type: Jar, dependsOn: [javadoc, groovydoc]) {
-  baseName 'test'
-  classifier 'doc' //分类器,区分其他jar包
-  from javadoc.destinationDir, groovydoc.destinationDir
-}
-
-//配置工程工件,也就是jar产出的配置
-artifacts {
-  archives sourcesJar
-  archives docJar
-}
-
-//上传配置
-publishing {
-  publications {
-    plugin(MavenPublication) {
-      from components.java
-      //如果不指定，默认就是工程名
-      artifactId 'burial-plugin'
-
-      artifact sourcesJar
-      artifact docJar
-
-      //pom文件配置
-      pom.withXml {
-        def root = asNode()
-        def licensesNode = root.appendNode('licenses').appendNode('license')
-        licensesNode.appendNode('name', 'Apache License, Version 2.0')
-        licensesNode.appendNode('url', 'https://www.apache.org/licenses/LICENSE-2.0.txt')
-        licensesNode.appendNode('distribution', 'repo')
-        licensesNode.appendNode('comments', 'A business-friendly OSS license')
-      }
-    }
-  }
-}
-
-apply plugin: 'com.jfrog.bintray'
-
-bintray {
-  user = userName
-  key = userKey
-  //上传的内容
-  publications = ['plugin']
-  pkg {
-    repo = 'maven' //需要上传的仓库名
-    name = 'burial-plugin' //上传到jcenter的项目名
-    userOrg = 'yan157' //可选的,不传的话默认是上面的user
-    licenses = ['Apache-2.0'] //开源许可
-    //这里的地址是不会验证的,随便输入都可以,不配置也可以
-    vcsUrl = 'https://xxx.git'
-    version {
-      //name = '1.0-Final'//使用外面的version
-      desc = 'burial-plugin'
-      released = new Date()
-      vcsTag = version //版本控制里面的版本控制,比如svn,git
-      attributes = ['gradle-plugin': version]
-    }
-  }
-}
+//group 'com.yan.burial'
+//version '1.1.4'
+//
+//apply plugin: 'maven-publish'
+//
+////源代码打包任务
+//task sourcesJar(type: Jar) {
+//  baseName 'test'
+//  classifier 'sources' //分类器,区分其他jar包
+//  from sourceSets.main.allSource
+//}
+//
+////文档包任务
+//task docJar(type: Jar, dependsOn: [javadoc, groovydoc]) {
+//  baseName 'test'
+//  classifier 'doc' //分类器,区分其他jar包
+//  from javadoc.destinationDir, groovydoc.destinationDir
+//}
+//
+////配置工程工件,也就是jar产出的配置
+//artifacts {
+//  archives sourcesJar
+//  archives docJar
+//}
+//
+////上传配置
+//publishing {
+//  publications {
+//    plugin(MavenPublication) {
+//      from components.java
+//      //如果不指定，默认就是工程名
+//      artifactId 'burial-plugin'
+//
+//      artifact sourcesJar
+//      artifact docJar
+//
+//      //pom文件配置
+//      pom.withXml {
+//        def root = asNode()
+//        def licensesNode = root.appendNode('licenses').appendNode('license')
+//        licensesNode.appendNode('name', 'Apache License, Version 2.0')
+//        licensesNode.appendNode('url', 'https://www.apache.org/licenses/LICENSE-2.0.txt')
+//        licensesNode.appendNode('distribution', 'repo')
+//        licensesNode.appendNode('comments', 'A business-friendly OSS license')
+//      }
+//    }
+//  }
+//}
+//
+//apply plugin: 'com.jfrog.bintray'
+//
+//bintray {
+//  user = userName
+//  key = userKey
+//  //上传的内容
+//  publications = ['plugin']
+//  pkg {
+//    repo = 'maven' //需要上传的仓库名
+//    name = 'burial-plugin' //上传到jcenter的项目名
+//    userOrg = 'yan157' //可选的,不传的话默认是上面的user
+//    licenses = ['Apache-2.0'] //开源许可
+//    //这里的地址是不会验证的,随便输入都可以,不配置也可以
+//    vcsUrl = 'https://xxx.git'
+//    version {
+//      //name = '1.0-Final'//使用外面的version
+//      desc = 'burial-plugin'
+//      released = new Date()
+//      vcsTag = version //版本控制里面的版本控制,比如svn,git
+//      attributes = ['gradle-plugin': version]
+//    }
+//  }
+//}

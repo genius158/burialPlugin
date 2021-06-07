@@ -13,4 +13,9 @@ public class DefaultListener implements Listener {
             Log.e("BurialTimer", "cost:" + cost + "  " + className + "#" + methodName);
         }
     }
+
+    @Override
+    public void onTimerEntry(BurialTimer ignore, String className, String methodName, String des) {
+
+    }
 }

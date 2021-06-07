@@ -14,7 +14,7 @@ public class BurialPlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project project) {
-        project.getDependencies().add("api", "com.yan.burial.method.timer:burialtimer:1.0.8");
+//        project.getDependencies().add("api", "com.yan.burial.method.timer:burialtimer:1.0.8");
         BaseExtension extension = null;
         try {
             extension = project.getExtensions().getByType(AppExtension.class);
